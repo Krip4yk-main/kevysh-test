@@ -2,6 +2,8 @@ import {CrudController} from "./crud.controller";
 import {ScheduleTable, TrainsTable} from "../models";
 import * as express from "express";
 import {BAD_REQUEST, ERROR, OK} from "../utils/responces";
+import {Op} from "sequelize";
+import ScheduleModel, {ScheduleFound} from "../interfaces/schedule.interface";
 
 
 class TrainsTableController extends CrudController {
@@ -16,6 +18,7 @@ class TrainsTableController extends CrudController {
         this.router.get(this.path, this.getAll);
         this.router.get(this.path + '/id', this.getOne); //for some reasons /:id do
         this.router.post(this.path + "/update", this.update);
+        this.router.post(this.path + "/find", this.find);
         this.router.post(this.path, this.create);
         this.router.delete(this.path, this.delete);
     }
@@ -53,7 +56,7 @@ class TrainsTableController extends CrudController {
         let data: any
         try {
             data = JSON.parse(JSON.stringify(request.body)).data;
-            if (!data || !data.id || (!data.trainId && !data.from && !data.to && !data.day && !data.time)) {
+            if (!data || !data.id || (!data.trainId && !data.from_city && !data.to_city && !data.day && !data.time)) {
                 BAD_REQUEST(response, {message: "Missing arguments or bad JSON, read docs!"})
                 return;
             }
@@ -78,6 +81,53 @@ class TrainsTableController extends CrudController {
             console.error(error)
             ERROR(response, {message: error})
         })
+    }
+
+    find = async (request: express.Request, response: express.Response) => {
+        let data: any
+        try {
+            data = JSON.parse(JSON.stringify(request.body)).data;
+            if (!data || (!data.from_city && !data.to_city)) {
+                BAD_REQUEST(response, {message: "Missing arguments or bad JSON, read docs!"})
+                return;
+            }
+        } catch (error) {
+            console.error(error)
+            BAD_REQUEST(response, {message: error})
+            return;
+        }
+        try {
+            const schedule = await ScheduleTable.findAll({
+                where: {
+                    from_city: {
+                        [Op.like]: `%${data.from_city}%`
+                    },
+                    to_city: {
+                        [Op.like]: `%${data.to_city}%`
+                    }
+                }
+            });
+            const scheduleDTO: ScheduleFound[] = [];
+            for (const value of schedule) {
+                const train = await TrainsTable.findOne({
+                    where: {
+                        id: value.trainId
+                    }
+                });
+                if (!train) throw new Error("no train");
+                scheduleDTO.push({
+                    trainName: train.name,
+                    from_city: value.from_city,
+                    to_city: value.to_city,
+                    day: value.day,
+                    time: value.time
+                })
+            }
+            OK(response, {res: scheduleDTO})
+        } catch (error: any) {
+            console.error(error)
+            ERROR(response, {message: error})
+        }
     }
 }
 

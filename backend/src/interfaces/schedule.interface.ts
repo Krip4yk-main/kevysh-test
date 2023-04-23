@@ -12,3 +12,11 @@ export default interface ScheduleModel {
     createdAt?: any,
     updatedAta?: any
 }
+
+export interface ScheduleFound {
+    trainName: string,
+    from_city: string,
+    to_city: string,
+    day: string,
+    time: string, // format 'hh:mm'
+}

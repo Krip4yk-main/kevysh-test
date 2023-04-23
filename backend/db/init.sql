@@ -1,4 +1,6 @@
+DROP TABLE IF EXISTS schedule;
 DROP TABLE IF EXISTS trains;
+
 CREATE TABLE IF NOT EXISTS trains
 (
     id   int primary key auto_increment     not null,
@@ -7,7 +9,6 @@ CREATE TABLE IF NOT EXISTS trains
     updatedAt datetime not null default now()
 );
 
-DROP TABLE IF EXISTS schedule;
 CREATE TABLE IF NOT EXISTS schedule
 (
     id   int primary key auto_increment     not null,

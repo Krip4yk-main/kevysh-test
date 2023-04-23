@@ -1,6 +1,6 @@
 # backend part 
 #### Ubuntu
-#### node v19.7.0
+#### node 18.15.0
 ```
     npm install
 ```

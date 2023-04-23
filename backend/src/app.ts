@@ -5,6 +5,7 @@ import * as models from "./models";
 import {CrudController} from "./controllers/crud.controller";
 
 require("dotenv").config()
+const cors = require('cors');
 
 class App {
     public app: express.Application;
@@ -13,6 +14,7 @@ class App {
     constructor(controllers: CrudController[], port: number) {
         this.app = express();
         this.port = port;
+        this.app.use(cors())
 
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
