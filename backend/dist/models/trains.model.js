@@ -13,6 +13,6 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false, defaultValue: 'Default Train' })
 ], Trains.prototype, "name", void 0);
 Trains = __decorate([
-    (0, sequelize_typescript_1.Table)({ tableName: "initTable", timestamps: true })
+    (0, sequelize_typescript_1.Table)({ tableName: "trains", timestamps: true })
 ], Trains);
 exports.default = Trains;

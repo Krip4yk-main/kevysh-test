@@ -4,8 +4,8 @@ export default interface ScheduleModel {
     id?: number,
 
     trainId: number,
-    from: string,
-    to: string,
+    from_city: string,
+    to_city: string,
     day: DayName,
     time: string, // format 'hh:mm'
 

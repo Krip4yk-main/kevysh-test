@@ -1,6 +1,7 @@
 .idea
 node_modules
 .kevysh-mysql
+dist
 
 .env
 .package-lock.json

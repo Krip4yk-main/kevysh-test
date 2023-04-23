@@ -19,10 +19,10 @@ __decorate([
 ], Schedule.prototype, "trainId", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false })
-], Schedule.prototype, "from", void 0);
+], Schedule.prototype, "from_city", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false })
-], Schedule.prototype, "to", void 0);
+], Schedule.prototype, "to_city", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false })
 ], Schedule.prototype, "day", void 0);
@@ -30,6 +30,6 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false })
 ], Schedule.prototype, "time", void 0);
 Schedule = __decorate([
-    (0, sequelize_typescript_1.Table)({ tableName: "initTable", timestamps: true })
+    (0, sequelize_typescript_1.Table)({ tableName: "schedule", timestamps: true })
 ], Schedule);
 exports.default = Schedule;

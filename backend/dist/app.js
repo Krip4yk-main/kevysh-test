@@ -54,6 +54,7 @@ class App {
         const dbName = process.env.MYSQL_DB;
         const dbUser = process.env.MYSQL_ROOT;
         const dbPassword = process.env.MYSQL_ROOT_PASSWORD;
+        console.log(Object.values(models));
         const sequelize = new sequelize_typescript_1.Sequelize(dbName, dbUser, dbPassword, {
             host: dbHost,
             port: dbPort,

@@ -1,12 +1,12 @@
 import {CrudController} from "./crud.controller";
-import {InitTable} from "../models";
+import {TrainsTable} from "../models";
 
 
-class InitTableController extends CrudController {
-    public path = '/bank';
+class TrainsTableController extends CrudController {
+    public path = '/trains';
 
     constructor() {
-        super(InitTable);
+        super(TrainsTable);
         this.initializeRoutes();
     }
 
@@ -43,4 +43,4 @@ class InitTableController extends CrudController {
     }*/
 }
 
-export default InitTableController;
+export default TrainsTableController;
