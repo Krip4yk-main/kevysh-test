@@ -1,0 +1,1 @@
+export {default as InitTableController} from "./InitTable.controller"
